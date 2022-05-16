@@ -9,6 +9,10 @@ module.exports = {
   mode,
   resolve: {
     extensions: ['.js', '.jsx'],
+    alias: {
+      '@components': path.resolve(__dirname, '/src/components'),
+      '@screens': path.resolve(__dirname, '/src/screens'),
+    }
   },
   output: {
     path: path.join(__dirname, 'dist', 'public'),
@@ -21,9 +25,7 @@ module.exports = {
     // publicPath: '/assets/',
     historyApiFallback: true,
   },
-  plugins: [
-    new MiniCssExtractPlugin(),
-  ],
+  plugins: [new MiniCssExtractPlugin()],
   module: {
     rules: [
       {
@@ -40,6 +42,13 @@ module.exports = {
           { loader: 'sass-loader' },
         ],
       },
+      {
+        test: /\.(js)$/,
+        resolve: {
+          fullySpecified: false,
+        },
+      },
     ],
   },
+  devtool: 'inline-source-map',
 };
