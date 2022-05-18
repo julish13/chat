@@ -1,14 +1,11 @@
 export default {
   translation: {
     title: 'Hexlet Chat',
-    errorMessages: {
-    },
+    errorMessages: {},
     login: {
       enter: 'Войти',
       username: 'Ваш ник',
-      password: 'Пароль'
+      password: 'Пароль',
     },
-
-  }
-
+  },
 };

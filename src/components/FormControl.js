@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import { Form } from 'react-bootstrap';
 
 const FormControl = ({
@@ -8,7 +9,7 @@ const FormControl = ({
   formik,
   className,
   type,
-  autoComplete
+  autoComplete,
 }) => {
   return (
     <Form.Group className={className} controlId={id}>
