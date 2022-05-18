@@ -18,6 +18,9 @@ build:
 lint:
 	npx eslint . --ext js,jsx
 
+format:
+	npx prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc
+
 publish:
 	npm publish
 

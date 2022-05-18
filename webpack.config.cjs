@@ -9,9 +9,9 @@ module.exports = {
   mode,
   resolve: {
     extensions: ['.js', '.jsx'],
-    alias: {
-      '@components': path.resolve(__dirname, '/src/components'),
-      '@screens': path.resolve(__dirname, '/src/screens'),
+    alias:{
+      components: path.resolve(__dirname, "src", "components"),
+      screens: path.resolve(__dirname, "src", "screens")
     }
   },
   output: {

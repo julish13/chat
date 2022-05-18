@@ -9,6 +9,9 @@ extends:
   - airbnb
   - "plugin:functional/external-recommended"
   - "plugin:functional/recommended"
+  - "plugin:react/recommended"
+  - "plugin:prettier/recommended"
+
 
 parser: "@babel/eslint-parser"
 
@@ -19,11 +22,19 @@ env:
   browser: true
   node: true
   jest: true
+  es2022: true
 
 settings:
   import/resolver:
-    - node
-    - webpack
+    node: true
+    webpack: true
+    alias: 
+      map: 
+        - - components
+          - ./src/components
+        - - screens
+          - ./src/screens
+    
 
 rules:
   import/extensions: 0
@@ -35,3 +46,8 @@ rules:
   functional/functional-parameters: 0
   functional/no-try-statement: 0
   functional/no-throw-statement: 0
+  react/jsx-filename-extension: 0
+  react/react-in-jsx-scope: 0
+  react/function-component-definition:
+    - 2
+    - namedComponents: arrow-function 
