@@ -1,6 +1,9 @@
 export default {
   translation: {
-    title: 'Hexlet Chat',
+    navigation: {
+      title: 'Hexlet Chat',
+      logout: 'Выйти',
+    },
     errorMessages: {
       authentication: 'Неверные имя пользователя или пароль',
     },
