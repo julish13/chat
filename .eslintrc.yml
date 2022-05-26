@@ -30,15 +30,15 @@ settings:
     webpack: true
     alias: 
       map: 
-        - - src
+        - - "@src"
           - ./src
-        - - components
+        - - "@components"
           - ./src/components
-        - - screens
+        - - "@screens"
           - ./src/screens
-        - - utils
+        - - "@utils"
           - ./src/utils
-        - - store
+        - - "@store"
           - ./src/store
     
 

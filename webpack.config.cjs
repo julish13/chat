@@ -10,11 +10,11 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
     alias:{
-      components: path.resolve(__dirname, "src", "components"),
-      screens: path.resolve(__dirname, "src", "screens"),
-      utils: path.resolve(__dirname, "src", "utils"),
-      store: path.resolve(__dirname, "src", "store"),
-      src: path.resolve(__dirname, "src"),
+      '@components': path.resolve(__dirname, "src", "components"),
+      '@screens': path.resolve(__dirname, "src", "screens"),
+      '@utils': path.resolve(__dirname, "src", "utils"),
+      '@store': path.resolve(__dirname, "src", "store"),
+      '@src': path.resolve(__dirname, "src"),
     }
   },
   output: {

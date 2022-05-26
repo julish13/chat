@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
-import routes from 'src/routes.js';
-import AuthContext from 'store/context/auth-context.js';
+import routes from '@src/routes.js';
+import AuthContext from '@store/context/auth-context.js';
 import FormControl from './FormControl.js';
 
 const url = routes.loginPath();
