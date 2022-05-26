@@ -1,5 +1,3 @@
-/* eslint-disable no-alert, no-console */
-
 import { createContext, useState, useMemo, useCallback } from 'react';
 
 const AuthContext = createContext({
