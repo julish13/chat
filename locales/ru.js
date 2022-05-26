@@ -12,5 +12,8 @@ export default {
       username: 'Ваш ник',
       password: 'Пароль',
     },
+    chat: {
+      channels: 'Каналы'
+    }
   },
 };
