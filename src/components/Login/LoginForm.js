@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
@@ -10,6 +10,7 @@ import FormControl from './FormControl.js';
 const url = routes.loginPath();
 
 const LoginForm = () => {
+  const [authenticationFailed, setAuthenticationFailed] = useState(false);
   const { t } = useTranslation();
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -27,6 +28,7 @@ const LoginForm = () => {
           return res.json();
         }
         return res.json().then(() => {
+          setAuthenticationFailed(true);
           const errorMessage = 'Authentication failed!';
           throw new Error(errorMessage);
         });
@@ -58,6 +60,7 @@ const LoginForm = () => {
         required
         formik={formik}
         autoComplete="username"
+        isInvalid={authenticationFailed}
       />
       <FormControl
         className="form-floating mb-4"
@@ -67,8 +70,15 @@ const LoginForm = () => {
         required
         formik={formik}
         autoComplete="current-password"
+        showError
+        isInvalid={authenticationFailed}
       />
-      <Button type="submit" variant="outline-primary" className="w-100 mb-3">
+      <Button
+        type="submit"
+        variant="outline-primary"
+        className="w-100 mb-3"
+        onBlur={() => setAuthenticationFailed(false)}
+      >
         {t('login.enter')}
       </Button>
     </Form>
