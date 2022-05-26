@@ -1,15 +1,49 @@
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
-import FormControl from './FormControl';
+import routes from 'src/routes.js';
+import AuthContext from 'store/context/auth-context.js';
+import FormControl from './FormControl.js';
+
+const url = routes.loginPath();
 
 const LoginForm = () => {
   const { t } = useTranslation();
+  const { login } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const submitHandler = async (values) => {
+    fetch(url, {
+      method: 'POST',
+      body: JSON.stringify(values),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return res.json().then(() => {
+          const errorMessage = 'Authentication failed!';
+          throw new Error(errorMessage);
+        });
+      })
+      .then((data) => {
+        login(data.token);
+        navigate('/');
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
 
   const formik = useFormik({
     initialValues: { username: '', password: '' },
     onSubmit: (values) => {
-      console.log(values);
+      submitHandler(values);
     },
   });
 
