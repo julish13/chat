@@ -7,7 +7,7 @@ import store from '@store';
 import { AuthContextProvider } from '@store/context/auth-context.js';
 import App from './App.js';
 import i18n from '../lib/i18n';
-import '../assets/application.scss';
+import '@assets/application.scss';
 
 const container = document.querySelector('#chat');
 const root = createRoot(container);

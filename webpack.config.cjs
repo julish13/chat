@@ -10,11 +10,12 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
     alias:{
+      '@src': path.resolve(__dirname, "src"),
       '@components': path.resolve(__dirname, "src", "components"),
       '@screens': path.resolve(__dirname, "src", "screens"),
       '@utils': path.resolve(__dirname, "src", "utils"),
       '@store': path.resolve(__dirname, "src", "store"),
-      '@src': path.resolve(__dirname, "src"),
+      '@assets': path.resolve(__dirname, "assets"),
     }
   },
   output: {
@@ -50,6 +51,14 @@ module.exports = {
         resolve: {
           fullySpecified: false,
         },
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+          },
+        ],
       },
     ],
   },

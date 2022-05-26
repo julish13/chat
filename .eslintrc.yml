@@ -40,6 +40,8 @@ settings:
           - ./src/utils
         - - "@store"
           - ./src/store
+        - - "@assets"
+          - ./assets
     
 
 rules:
@@ -47,6 +49,7 @@ rules:
   react/prop-types: 0
   no-console: 0
   no-shadow: 0
+  import/prefer-default-export: 0
   functional/no-conditional-statement: 0
   functional/no-expression-statement: 0
   functional/immutable-data: 0
