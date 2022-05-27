@@ -34,7 +34,7 @@ const LoginForm = () => {
         });
       })
       .then((data) => {
-        login(data.token);
+        login(data);
         navigate('/');
       })
       .catch((error) => {
