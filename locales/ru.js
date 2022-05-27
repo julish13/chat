@@ -13,7 +13,7 @@ export default {
       password: 'Пароль',
     },
     chat: {
-      channels: 'Каналы'
-    }
+      channels: 'Каналы',
+    },
   },
 };
