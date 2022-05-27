@@ -12,7 +12,7 @@ const Login = () => {
           <Card className="shadow-sm">
             <Card.Body className="row p-5">
               <Col className="col-12 col-md-6 d-flex align-items-center justify-content-center">
-                <Card.Img src={loginImg} className="rounded-circle" alt={t('login.enter')} />
+                <img src={loginImg} className="rounded-circle" alt={t('login.enter')} />
               </Col>
               <LoginForm />
             </Card.Body>
