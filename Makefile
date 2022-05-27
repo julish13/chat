@@ -21,6 +21,9 @@ lint:
 format:
 	npx prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc
 
+precommit: 
+	npx lint-staged
+
 publish:
 	npm publish
 
