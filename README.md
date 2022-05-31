@@ -1,4 +1,4 @@
-# project-frontend-l4
+# Chat (slack-like)
 
 ### Hexlet tests and linter status:
 
