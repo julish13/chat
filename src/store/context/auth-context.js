@@ -10,8 +10,9 @@ const AuthContext = createContext({
 
 const AuthContextProvider = ({ children }) => {
   const storedToken = localStorage.getItem('token');
+  const storedUsername = localStorage.getItem('username');
   const [token, setToken] = useState(storedToken || null);
-  const [username, setUsername] = useState(null);
+  const [username, setUsername] = useState(storedUsername || null);
 
   const isAuthenticated = !!token;
 
@@ -20,11 +21,13 @@ const AuthContextProvider = ({ children }) => {
     setToken(token);
     setUsername(username);
     localStorage.setItem('token', token);
+    localStorage.setItem('username', username);
   }, []);
 
   const logoutHandler = useCallback(() => {
     setToken(null);
     localStorage.removeItem('token');
+    localStorage.removeItem('username');
   }, []);
 
   const contextValue = useMemo(
