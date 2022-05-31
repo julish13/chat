@@ -6,6 +6,7 @@ const initialState = {
   channels: [],
   messages: [],
   currentChannelId: null,
+  isLoaded: false,
 };
 
 const chatSlice = createSlice({
@@ -17,6 +18,7 @@ const chatSlice = createSlice({
       state.channels = channels;
       state.messages = messages;
       state.currentChannelId = currentChannelId;
+      state.isLoaded = true;
     },
   },
 });

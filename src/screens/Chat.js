@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState, useMemo } from 'react';
+import { useContext, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, Row } from 'react-bootstrap';
 import AuthContext from '@store/context/auth-context.js';
@@ -12,34 +12,28 @@ import MessagesBox from '@components/Chat/MessagesBox';
 import MessageForm from '@components/Chat/MessageForm';
 
 const Chat = () => {
-  const { token } = useContext(AuthContext);
   const dispatch = useDispatch();
-  const [isLoading, setIsLoading] = useState(true);
-  const [activeChannelMessages, setActiveChannelMessages] = useState(null);
-  const { channels, currentChannelId, messages } = useSelector((state) => state.chat);
-  const { name: currentChannelName } = useMemo(
-    () => channels.length > 0 && channels.find(({ id }) => currentChannelId === id),
-    [channels.length, currentChannelId]
-  );
+  const { token } = useContext(AuthContext);
+  const { channels, currentChannelId, messages, isLoaded } = useSelector((state) => state.chat);
 
   useEffect(() => {
     dispatch(fetchChatData(token));
   }, [dispatch]);
 
-  useEffect(() => {
-    setActiveChannelMessages(messages.filter(({ channelId }) => channelId === currentChannelId));
-  }, [currentChannelId, messages]);
+  const currentChannelName = useMemo(
+    () => isLoaded && channels.find(({ id }) => currentChannelId === id).name,
+    [isLoaded, currentChannelId]
+  );
 
-  useEffect(() => {
-    if (channels.length > 0 && activeChannelMessages !== null) {
-      setIsLoading(false);
-    }
-  }, [channels]);
+  const activeChannelMessages = useMemo(
+    () => isLoaded && messages.filter(({ channelId }) => channelId === currentChannelId),
+    [currentChannelId, messages, isLoaded]
+  );
 
   return (
     <Container className="h-100 my-4 overflow-hidden rounded shadow">
       <Row className="h-100 bg-white flex-md-row">
-        {isLoading ? (
+        {!isLoaded ? (
           <p>Loading...</p>
         ) : (
           <>
@@ -48,7 +42,10 @@ const Chat = () => {
               <ChannelsList channels={channels} currentChannelId={currentChannelId} />
             </Channels>
             <ActiveChannel>
-              <ActiveChannelHeading name={currentChannelName} count={messages.length} />
+              <ActiveChannelHeading
+                name={currentChannelName}
+                count={activeChannelMessages.length}
+              />
               <MessagesBox messages={activeChannelMessages} />
               <MessageForm />
             </ActiveChannel>
