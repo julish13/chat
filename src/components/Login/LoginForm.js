@@ -44,9 +44,7 @@ const LoginForm = () => {
 
   const formik = useFormik({
     initialValues: { username: '', password: '' },
-    onSubmit: (values) => {
-      submitHandler(values);
-    },
+    onSubmit: submitHandler,
   });
 
   return (
