@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { Layout } from '@components';
 import { Chat, Login } from '@screens';
 import PrivateRoute from '@utils/PrivateRoute.js';
+import { WebSocketContextProvider } from '@store/context/web-socket-context';
 
 const App = () => (
   <Layout>
@@ -11,7 +12,9 @@ const App = () => (
         path="/"
         element={
           <PrivateRoute>
-            <Chat />
+            <WebSocketContextProvider>
+              <Chat />
+            </WebSocketContextProvider>
           </PrivateRoute>
         }
       />

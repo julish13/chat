@@ -6,6 +6,7 @@ export default {
     },
     errorMessages: {
       authentication: 'Неверные имя пользователя или пароль',
+      network: 'Ошибка соединения',
     },
     login: {
       enter: 'Войти',

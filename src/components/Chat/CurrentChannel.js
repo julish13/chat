@@ -23,7 +23,7 @@ const CurrentChannel = () => {
       <div className="d-flex flex-column h-100">
         <CurrentChannelHeading name={currentChannelName} count={activeChannelMessages.length} />
         <MessagesBox messages={activeChannelMessages} />
-        <MessageForm currentChannelId={currentChannelId} />
+        <MessageForm channelId={currentChannelId} />
       </div>
     </Col>
   );

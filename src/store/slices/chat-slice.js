@@ -20,6 +20,10 @@ const chatSlice = createSlice({
       state.currentChannelId = currentChannelId;
       state.isLoaded = true;
     },
+    addMessage(state, action) {
+      const message = action.payload;
+      state.messages.push(message);
+    },
   },
 });
 
