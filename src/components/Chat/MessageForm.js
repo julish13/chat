@@ -1,7 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { InputGroup, Form, ButtonGroup } from 'react-bootstrap';
+import { InputGroup, Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import InputSvg from '@assets/img/chat-input.svg';
 
 const MessageForm = () => {
@@ -9,11 +10,17 @@ const MessageForm = () => {
 
   const submitHandler = () => {};
 
+  const schema = Yup.object().shape({
+    body: Yup.string().required(),
+  });
+
   const formik = useFormik({
     initialValues: { body: '' },
     onSubmit: (values) => {
       submitHandler(values);
     },
+    validateOnMount: true,
+    validationSchema: schema,
   });
 
   return (
@@ -28,10 +35,10 @@ const MessageForm = () => {
             id="body"
             {...formik.getFieldProps('body')}
           />
-          <ButtonGroup vertical className="btn" type="submit">
+          <button className=" btn btn-group-vertical" type="submit" disabled={!formik.isValid}>
             <InputSvg />
             <span className="visually-hidden">{t('chat.input.submit')}</span>
-          </ButtonGroup>
+          </button>
         </InputGroup>
       </form>
     </div>
