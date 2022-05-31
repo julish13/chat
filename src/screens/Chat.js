@@ -7,8 +7,8 @@ import {
   Channels,
   ChannelsHeading,
   ChannelsList,
-  ActiveChannel,
-  ActiveChannelHeading,
+  CurrentChannel,
+  CurrentChannelHeading,
   MessagesBox,
   MessageForm,
 } from '@components';
@@ -43,14 +43,14 @@ const Chat = () => {
               <ChannelsHeading />
               <ChannelsList channels={channels} currentChannelId={currentChannelId} />
             </Channels>
-            <ActiveChannel>
-              <ActiveChannelHeading
+            <CurrentChannel>
+              <CurrentChannelHeading
                 name={currentChannelName}
                 count={activeChannelMessages.length}
               />
               <MessagesBox messages={activeChannelMessages} />
               <MessageForm />
-            </ActiveChannel>
+            </CurrentChannel>
           </>
         )}
       </Row>

@@ -1,5 +1,5 @@
-import ActiveChannel from './Chat/ActiveChannel';
-import ActiveChannelHeading from './Chat/ActiveChannelHeading';
+import CurrentChannel from './Chat/CurrentChannel';
+import CurrentChannelHeading from './Chat/CurrentChannelHeading';
 import Channels from './Chat/Channels';
 import ChannelsHeading from './Chat/ChannelsHeading';
 import ChannelsList from './Chat/ChannelsList';
@@ -9,8 +9,8 @@ import Layout from './Layout/Layout';
 import LoginForm from './Login/LoginForm';
 
 export {
-  ActiveChannel,
-  ActiveChannelHeading,
+  CurrentChannel,
+  CurrentChannelHeading,
   Channels,
   ChannelsHeading,
   ChannelsList,

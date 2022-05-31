@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
-const ActiveChannelHeading = ({ name, count }) => {
+const CurrentChannelHeading = ({ name, count }) => {
   const { t } = useTranslation();
 
   return (
@@ -13,4 +13,4 @@ const ActiveChannelHeading = ({ name, count }) => {
   );
 };
 
-export default ActiveChannelHeading;
+export default CurrentChannelHeading;
