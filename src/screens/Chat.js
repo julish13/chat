@@ -15,6 +15,7 @@ const Chat = () => {
   const { token } = useContext(AuthContext);
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
+  const [activeChannelMessages, setActiveChannelMessages] = useState(null);
   const { channels, currentChannelId, messages } = useSelector((state) => state.chat);
   const { name: currentChannelName } = useMemo(
     () => channels.length > 0 && channels.find(({ id }) => currentChannelId === id),
@@ -26,7 +27,11 @@ const Chat = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (channels.length > 0) {
+    setActiveChannelMessages(messages.filter(({ channelId }) => channelId === currentChannelId));
+  }, [currentChannelId, messages]);
+
+  useEffect(() => {
+    if (channels.length > 0 && activeChannelMessages !== null) {
       setIsLoading(false);
     }
   }, [channels]);
@@ -44,7 +49,7 @@ const Chat = () => {
             </Channels>
             <ActiveChannel>
               <ActiveChannelHeading name={currentChannelName} count={messages.length} />
-              <MessagesBox />
+              <MessagesBox messages={activeChannelMessages} />
               <MessageForm />
             </ActiveChannel>
           </>
