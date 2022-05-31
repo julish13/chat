@@ -3,13 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Container, Row } from 'react-bootstrap';
 import AuthContext from '@store/context/auth-context.js';
 import { fetchChatData } from '@store/slices/chat-actions.js';
-import Channels from '@components/Chat/Channels';
-import ChannelsHeading from '@components/Chat/ChannelsHeading';
-import ChannelsList from '@components/Chat/ChannelsList';
-import ActiveChannel from '@components/Chat/ActiveChannel';
-import ActiveChannelHeading from '@components/Chat/ActiveChannelHeading';
-import MessagesBox from '@components/Chat/MessagesBox';
-import MessageForm from '@components/Chat/MessageForm';
+import {
+  Channels,
+  ChannelsHeading,
+  ChannelsList,
+  ActiveChannel,
+  ActiveChannelHeading,
+  MessagesBox,
+  MessageForm,
+} from '@components';
 
 const Chat = () => {
   const dispatch = useDispatch();

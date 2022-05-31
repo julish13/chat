@@ -1,6 +1,6 @@
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import LoginForm from '@components/Login/LoginForm.js';
+import { LoginForm } from '@components';
 import loginImg from '@assets/img/login.jpeg';
 
 const Login = () => {
