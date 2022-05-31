@@ -19,6 +19,11 @@ export default {
         count_few: '{{count}} сообщения',
         count_many: '{{count}} сообщений',
       },
+      input: {
+        label: 'Новое сообщение',
+        placeholder: 'Введите сообщение...',
+        submit: 'Отправить',
+      },
     },
   },
 };
