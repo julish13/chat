@@ -1,6 +1,8 @@
+import { useSelector } from 'react-redux';
 import { Button, Nav } from 'react-bootstrap';
 
-const ChannelsList = ({ channels, currentChannelId }) => {
+const ChannelsList = () => {
+  const { channels, currentChannelId } = useSelector((state) => state.chat);
   return (
     <Nav as="ul" variant="pills" fill className="flex-column px-2">
       {channels.map(({ id, name }) => (
