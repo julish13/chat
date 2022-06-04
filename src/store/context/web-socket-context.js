@@ -1,6 +1,5 @@
-import { createContext, useState } from 'react';
+import { createContext, useState, useEffect, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
-import io from 'socket.io-client';
 import { chatActions } from '../slices/chat-slice.js';
 
 const WebSocketContext = createContext({
@@ -10,13 +9,17 @@ const WebSocketContext = createContext({
   isSubmitting: false,
 });
 
-const WebSocketContextProvider = ({ children }) => {
+const WebSocketContextProvider = ({ children, socket }) => {
   const [hasError, setHasError] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  let socket;
-  let contextValue;
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    socket.on('newMessage', (message) => {
+      dispatch(chatActions.addMessage(message));
+    });
+  }, []);
 
   const sendMessage = (message) => {
     setIsSubmitting(true);
@@ -29,20 +32,15 @@ const WebSocketContextProvider = ({ children }) => {
     });
   };
 
-  if (!socket) {
-    socket = io();
-
-    socket.on('newMessage', (message) => {
-      dispatch(chatActions.addMessage(message));
-    });
-
-    contextValue = {
+  const contextValue = useMemo(
+    () => ({
       socket,
       sendMessage,
       hasError,
       isSubmitting,
-    };
-  }
+    }),
+    [socket, sendMessage, hasError, isSubmitting]
+  );
 
   return <WebSocketContext.Provider value={contextValue}>{children}</WebSocketContext.Provider>;
 };
