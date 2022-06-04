@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { useContext, useRef } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { InputGroup, Form, Overlay, Spinner } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
@@ -9,6 +9,7 @@ import AuthContext from '@store/context/auth-context.js';
 import InputSvg from '@assets/img/chat-input.svg';
 
 const MessageForm = ({ channelId }) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { t } = useTranslation();
   const webSocketContext = useContext(WebSocketContext);
   const authContext = useContext(AuthContext);
@@ -16,11 +17,14 @@ const MessageForm = ({ channelId }) => {
   const inputRef = useRef();
 
   const submitHandler = ({ body }) => {
-    webSocketContext.sendMessage({
-      body,
-      channelId,
-      username: authContext.username,
-    });
+    webSocketContext.sendMessage(
+      {
+        body,
+        channelId,
+        username: authContext.username,
+      },
+      setIsSubmitting
+    );
   };
 
   const schema = Yup.object().shape({
@@ -77,13 +81,13 @@ const MessageForm = ({ channelId }) => {
           <button
             className="btn btn-group-vertical d-flex justify-content-center align-items-center"
             type="submit"
-            disabled={!formik.isValid || webSocketContext.isSubmitting}
+            disabled={!formik.isValid || isSubmitting}
             style={{
               width: '46px',
               height: '34px',
             }}
           >
-            {webSocketContext.isSubmitting ? (
+            {isSubmitting ? (
               <Spinner animation="border" variant="secondary" role="status" size="sm">
                 <span className="visually-hidden">Loading...</span>
               </Spinner>
