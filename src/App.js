@@ -5,14 +5,14 @@ import { Chat, Login } from '@screens';
 import PrivateRoute from '@utils/PrivateRoute.js';
 import { WebSocketContextProvider } from '@store/context/web-socket-context';
 
-const App = ({ socket }) => (
+const App = () => (
   <Layout>
     <Routes>
       <Route
         path="/"
         element={
           <PrivateRoute>
-            <WebSocketContextProvider socket={socket}>
+            <WebSocketContextProvider>
               <Chat />
             </WebSocketContextProvider>
           </PrivateRoute>

@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
+import { io } from 'socket.io-client';
 import { chatActions } from '../slices/chat-slice.js';
 
 const WebSocketContext = createContext({
@@ -8,8 +9,9 @@ const WebSocketContext = createContext({
   hasError: false,
 });
 
-const WebSocketContextProvider = ({ children, socket }) => {
+const WebSocketContextProvider = ({ children }) => {
   const [hasError, setHasError] = useState(false);
+  const [socket] = useState(io());
 
   const dispatch = useDispatch();
 
@@ -17,6 +19,10 @@ const WebSocketContextProvider = ({ children, socket }) => {
     socket.on('newMessage', (message) => {
       dispatch(chatActions.addMessage(message));
     });
+
+    return () => {
+      socket.disconnect();
+    };
   }, []);
 
   const sendMessage = (message, setIsSubmitting) => {
