@@ -63,7 +63,7 @@ export default async (app, options) => {
   setUpViews(app);
   setUpStaticAssets(app);
   await app.register(fastifySocketIo);
-  addRoutes(app, options?.state || {});
+  addRoutes(app, isProduction, options?.state || {});
 
   return app;
 };

@@ -39,7 +39,7 @@ const buildState = (defaultState) => {
   return state;
 };
 
-export default (app, defaultState = {}) => {
+export default (app, isProduction, defaultState = {}) => {
   const state = buildState(defaultState);
 
   app.io.on('connect', (socket) => {
@@ -131,6 +131,12 @@ export default (app, defaultState = {}) => {
 
     reply.header('Content-Type', 'application/json; charset=utf-8').send(_.omit(state, 'users'));
   });
+
+  if (!isProduction) {
+    app.get('/assets/:file.chunk.js', (_req, reply) => {
+      reply.redirect(303, `http://localhost:8090${_req.url}`);
+    });
+  }
 
   app.get('*', (_req, reply) => {
     reply.view('index.pug');

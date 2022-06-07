@@ -21,6 +21,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist', 'public'),
     publicPath: '/assets/',
+    chunkFilename: '[name].chunk.js'
   },
   devServer: {
     compress: true,

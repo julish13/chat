@@ -7,7 +7,6 @@ start-backend:
 	npm start --watch --verbose-watch
 
 start-frontend:
-	make build
 	npx webpack serve
 
 install-deps:
