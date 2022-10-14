@@ -1,19 +1,16 @@
-install: install-deps
+install: npm ci
 
 start:
-	heroku local -f Procfile.dev
+	make start-backend & make start-frontend
 
 start-backend:
-	npm start --watch --verbose-watch
+	npx start-server
 
 start-frontend:
-	npx webpack serve
-
-install-deps:
-	npm ci
+	npm run dev
 
 build:
-	npm run build
+	npm run prebuild & npm run build
 
 lint:
 	npx eslint . --ext js,jsx
@@ -24,13 +21,5 @@ format:
 precommit: 
 	npx lint-staged
 
-publish:
-	npm publish
-
 deploy:
 	git push heroku
-
-test:
-	npm test -s
-
-.PHONY: test

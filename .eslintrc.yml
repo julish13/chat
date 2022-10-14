@@ -41,7 +41,7 @@ settings:
         - - "@store"
           - ./src/store
         - - "@assets"
-          - ./assets
+          - ./src/assets
     
 
 rules:

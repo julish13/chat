@@ -6,10 +6,10 @@ import { I18nextProvider } from 'react-i18next';
 import store from '@store';
 import { AuthContextProvider } from '@store/context/auth-context.js';
 import App from './App.js';
-import i18n from '../lib/i18n';
-import '@assets/application.scss';
+import i18n from './lib/i18n';
+import './application.scss';
 
-const container = document.querySelector('#chat');
+const container = document.querySelector('#root');
 const root = createRoot(container);
 root.render(
   <AuthContextProvider>

@@ -1,3 +1,4 @@
+import React from 'react';
 import { Col } from 'react-bootstrap';
 import ChannelsHeading from './ChannelsHeading';
 import ChannelsList from './ChannelsList';

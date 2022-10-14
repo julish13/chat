@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect, useMemo } from 'react';
+import React, { createContext, useState, useEffect, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { io } from 'socket.io-client';
 import { chatActions } from '../slices/chat-slice.js';
@@ -17,6 +17,7 @@ const WebSocketContextProvider = ({ children }) => {
 
   useEffect(() => {
     socket.on('newMessage', (message) => {
+      console.log(message, 'sss');
       dispatch(chatActions.addMessage(message));
     });
 

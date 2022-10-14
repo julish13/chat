@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { Col } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import CurrentChannelHeading from './CurrentChannelHeading';

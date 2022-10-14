@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 
 const MessagesBox = ({ messages }) => {
   const messagesEndRef = useRef();
