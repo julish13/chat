@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect, useMemo } from 'react';
+import React, { createContext, useState, useEffect, useMemo, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { io } from 'socket.io-client';
 import { chatActions } from '../slices/chat-slice.js';
@@ -22,20 +22,24 @@ const WebSocketContextProvider = ({ children }) => {
     });
 
     return () => {
+      console.log('unmounted');
       socket.disconnect();
     };
   }, []);
 
-  const sendMessage = (message, setIsSubmitting) => {
-    setIsSubmitting(true);
-    socket.timeout(5000).emit('newMessage', message, (err) => {
-      if (err) {
-        setHasError(true);
-        console.error(err.message);
-      }
-      setIsSubmitting(false);
-    });
-  };
+  const sendMessage = useCallback(
+    (message, setIsSubmitting) => {
+      // setIsSubmitting(true);
+      socket.timeout(5000).emit('newMessage', message, (err) => {
+        if (err) {
+          setHasError(true);
+          console.error(err.message);
+        }
+        setIsSubmitting(false);
+      });
+    },
+    [socket]
+  );
 
   const contextValue = useMemo(
     () => ({

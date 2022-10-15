@@ -4,8 +4,10 @@ import { Container, Row } from 'react-bootstrap';
 import AuthContext from '@store/context/auth-context.js';
 import { fetchChatData } from '@store/slices/chat-actions.js';
 import { Channels, CurrentChannel } from '@components';
+import PrivateRoute from '@utils/PrivateRoute.js';
+import { WebSocketContextProvider } from '@store/context/web-socket-context';
 
-const Chat = () => {
+const ChatInner = () => {
   const dispatch = useDispatch();
   const { isLoaded } = useSelector((state) => state.chat);
   const { token } = useContext(AuthContext);
@@ -29,5 +31,13 @@ const Chat = () => {
     </Container>
   );
 };
+
+const Chat = () => (
+  <PrivateRoute>
+    <WebSocketContextProvider>
+      <ChatInner />
+    </WebSocketContextProvider>
+  </PrivateRoute>
+);
 
 export default Chat;
