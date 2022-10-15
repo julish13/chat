@@ -4,7 +4,7 @@
 
 [![Actions Status](https://github.com/julish13/frontend-project-lvl4/workflows/hexlet-check/badge.svg)](https://github.com/julish13/frontend-project-lvl4/actions)
 
-https://slack-chat-1.herokuapp.com/
+https://chat-production-a084.up.railway.app
 
 ## Requirements
 
@@ -18,5 +18,5 @@ $ make install
 
 ```sh
 $ make start
-# open http://localhost:5555
+# open http://localhost:8090/
 ```
