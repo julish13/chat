@@ -6,16 +6,20 @@ import MessagesBox from './MessagesBox';
 import MessageForm from './MessageForm';
 
 const CurrentChannel = () => {
-  const { channels, currentChannelId, messages, isLoaded } = useSelector((state) => state.chat);
+  const { channels, currentChannelId, messages } = useSelector((state) => state.chat);
+
+  if (channels.length === 0) {
+    return null;
+  }
 
   const currentChannelName = useMemo(
-    () => isLoaded && channels.find(({ id }) => currentChannelId === id).name,
-    [isLoaded, currentChannelId]
+    () => channels.find(({ id }) => currentChannelId === id).name,
+    [currentChannelId]
   );
 
   const activeChannelMessages = useMemo(
-    () => isLoaded && messages.filter(({ channelId }) => channelId === currentChannelId),
-    [currentChannelId, messages, isLoaded]
+    () => messages.filter(({ channelId }) => channelId === currentChannelId),
+    [currentChannelId, messages]
   );
 
   return (

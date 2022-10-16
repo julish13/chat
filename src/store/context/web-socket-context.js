@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect, useMemo, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { io } from 'socket.io-client';
-import { chatActions } from '../slices/chat-slice.js';
+import { chatActions } from '../slices/chat.js';
 
 const WebSocketContext = createContext({
   socket: null,
