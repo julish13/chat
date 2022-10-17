@@ -4,6 +4,7 @@ import { Layout, LoadingSpinner } from '@components';
 
 const Chat = lazy(() => import(/* webpackChunkName: "chat" */ '@screens/Chat.js'));
 const Login = lazy(() => import(/* webpackChunkName: "login" */ '@screens/Login.js'));
+const NotFound = lazy(() => import(/* webpackChunkName: "not-found" */ '@screens/NotFound.js'));
 
 const App = () => (
   <Layout>
@@ -11,6 +12,7 @@ const App = () => (
       <Routes>
         <Route path="/" element={<Chat />} />
         <Route path="/login" element={<Login />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>
   </Layout>
