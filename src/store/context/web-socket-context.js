@@ -17,19 +17,16 @@ const WebSocketContextProvider = ({ children }) => {
 
   useEffect(() => {
     socket.on('newMessage', (message) => {
-      console.log(message, 'sss');
       dispatch(chatActions.addMessage(message));
     });
 
     return () => {
-      console.log('unmounted');
       socket.disconnect();
     };
   }, []);
 
   const sendMessage = useCallback(
     (message, setIsSubmitting) => {
-      // setIsSubmitting(true);
       socket.timeout(5000).emit('newMessage', message, (err) => {
         if (err) {
           setHasError(true);
