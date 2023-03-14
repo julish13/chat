@@ -5,7 +5,6 @@ import AuthContext from '@store/context/auth-context.js';
 import { fetchChatData } from '@store/redux/chat.js';
 import { Channels, CurrentChannel } from '@components';
 import PrivateRoute from '@utils/PrivateRoute.js';
-import { WebSocketContextProvider } from '@store/context/web-socket-context';
 
 const ChatInner = () => {
   const dispatch = useDispatch();
@@ -34,9 +33,7 @@ const ChatInner = () => {
 
 const Chat = () => (
   <PrivateRoute>
-    <WebSocketContextProvider>
-      <ChatInner />
-    </WebSocketContextProvider>
+    <ChatInner />
   </PrivateRoute>
 );
 
