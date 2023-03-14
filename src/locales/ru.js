@@ -33,6 +33,7 @@ export default {
     modals: {
       newChannel: {
         title: 'Добавить канал',
+        label: 'Имя канала',
         cancel: 'Отменить',
         submit: 'Отправить',
       },
