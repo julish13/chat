@@ -2,6 +2,7 @@ import React from 'react';
 import { Modal as BootstrapModal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { modalActions } from '@store/redux/actions.js';
+import { modalSelector } from '@store/redux/selectors.js';
 import NewChannelModal from './NewChannel/NewChannelModal.js';
 
 const modals = {
@@ -10,7 +11,7 @@ const modals = {
 
 const Modal = () => {
   const dispatch = useDispatch();
-  const modalType = useSelector((state) => state.modal.type);
+  const { type: modalType } = useSelector(modalSelector);
 
   const onHide = () => {
     dispatch(modalActions.hideModal());
