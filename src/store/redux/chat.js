@@ -38,6 +38,14 @@ const chatSlice = createSlice({
       const message = action.payload;
       state.messages.push(message);
     },
+    setCurrentChannel(state, action) {
+      state.currentChannelId = action.payload;
+    },
+    addChannel(state, action) {
+      const channel = action.payload;
+      state.channels.push(channel);
+      state.currentChannelId = channel.id;
+    },
   },
   extraReducers: (builder) => {
     builder

@@ -20,6 +20,10 @@ const WebSocketContextProvider = ({ children }) => {
       dispatch(chatActions.addMessage(message));
     });
 
+    socket.on('newChannel', (channel) => {
+      dispatch(chatActions.addChannel(channel));
+    });
+
     return () => {
       socket.disconnect();
     };
@@ -39,13 +43,27 @@ const WebSocketContextProvider = ({ children }) => {
     [socket]
   );
 
+  const addChannel = useCallback(
+    (c) => {
+      socket.timeout(5000).emit('newChannel', c, (err) => {
+        console.log(c);
+        if (err) {
+          setHasError(true);
+          console.error(err.message);
+        }
+      });
+    },
+    [socket]
+  );
+
   const contextValue = useMemo(
     () => ({
       socket,
       sendMessage,
       hasError,
+      addChannel,
     }),
-    [socket, sendMessage, hasError]
+    [socket, sendMessage, hasError, addChannel]
   );
 
   return <WebSocketContext.Provider value={contextValue}>{children}</WebSocketContext.Provider>;
