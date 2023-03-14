@@ -5,7 +5,7 @@ import routes from '@src/routes.js';
 
 const dataUrl = routes.dataPath();
 
-export const fetchChatData = createAsyncThunk('users/fetchChatData', async (token) => {
+const fetchChatData = createAsyncThunk('users/fetchChatData', async (token) => {
   const response = await fetch(dataUrl, {
     method: 'GET',
     headers: {
@@ -67,5 +67,5 @@ const chatSlice = createSlice({
   },
 });
 
-export const chatActions = chatSlice.actions;
+export const chatActions = { ...chatSlice.actions, fetchChatData };
 export default chatSlice.reducer;

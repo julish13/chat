@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, Nav } from 'react-bootstrap';
-import { chatActions } from '@store/redux/chat';
+import { chatActions } from '@store/redux/actions.js';
 
 const ChannelsList = () => {
   const { channels, currentChannelId } = useSelector((state) => state.chat);

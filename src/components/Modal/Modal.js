@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal as BootstrapModal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { modalActions } from '@store/redux/modal.js';
+import { modalActions } from '@store/redux/actions.js';
 import NewChannelModal from './NewChannel/NewChannelModal.js';
 
 const modals = {

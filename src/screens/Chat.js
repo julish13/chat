@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, Row } from 'react-bootstrap';
 import AuthContext from '@store/context/auth-context.js';
-import { fetchChatData } from '@store/redux/chat.js';
+import { chatActions } from '@store/redux/actions.js';
 import { Channels, CurrentChannel } from '@components';
 import PrivateRoute from '@utils/PrivateRoute.js';
 
@@ -12,7 +12,7 @@ const ChatInner = () => {
   const { token } = useContext(AuthContext);
 
   useEffect(() => {
-    dispatch(fetchChatData(token));
+    dispatch(chatActions.fetchChatData(token));
   }, [dispatch]);
 
   return (

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { modalActions } from '@store/redux/modal';
+import { modalActions } from '@store/redux/actions';
 import PlusSvg from '@assets/img/plus.svg';
 
 const ChannelsHeading = () => {
