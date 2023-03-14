@@ -27,6 +27,7 @@ const WebSocketContextProvider = ({ children }) => {
 
   const sendMessage = useCallback(
     (message, setIsSubmitting) => {
+      setIsSubmitting(true);
       socket.timeout(5000).emit('newMessage', message, (err) => {
         if (err) {
           setHasError(true);
