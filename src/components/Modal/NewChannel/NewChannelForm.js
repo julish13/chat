@@ -1,16 +1,24 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useContext } from 'react';
+import React, { useContext, useMemo, useRef } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
-import { useDispatch } from 'react-redux';
-import { modalActions } from '@store/redux/modal.js';
+import * as Yup from 'yup';
+import { useDispatch, useSelector } from 'react-redux';
+import { modalActions } from '@store/redux/actions.js';
+import { chatSelector } from '@store/redux/selectors.js';
 import WebSocketContext from '@store/context/web-socket-context';
+
+const localePath = 'modals.newChannel.';
 
 const NewChannelForm = () => {
   const webSocketContext = useContext(WebSocketContext);
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const { channels } = useSelector(chatSelector);
+  const inputRef = useRef();
+
+  const channelsNames = useMemo(() => channels.map(({ name }) => name), [channels]);
 
   const onCancel = () => {
     dispatch(modalActions.hideModal());
@@ -21,29 +29,45 @@ const NewChannelForm = () => {
     onCancel();
   };
 
+  const schema = Yup.object({
+    name: Yup.string()
+      .trim()
+      .required(t('errorMessages.required'))
+      .notOneOf(channelsNames, t('errorMessages.unique')),
+  });
+
   const formik = useFormik({
     initialValues: { name: '' },
+    validationSchema: schema,
+    validateOnChange: false,
+    validateOnBlur: true,
     onSubmit: submitHandler,
+    validate: () => {
+      inputRef.current.focus();
+    },
   });
 
   return (
     <Form onSubmit={formik.handleSubmit}>
       <Form.Control
+        ref={inputRef}
         className="mb-2"
         type="name"
         name="name"
-        required
+        isInvalid={formik.errors.name}
+        autoFocus
         {...formik.getFieldProps('name')}
       />
       <Form.Label htmlFor="name" className="visually-hidden">
-        {t('modals.newChannel.label')}
+        {t(`${localePath}label`)}
       </Form.Label>
+      <Form.Control.Feedback type="invalid">{formik.errors.name}</Form.Control.Feedback>
       <div className="d-flex justify-content-end">
         <Button variant="secondary" onClick={onCancel} type="button" className="me-2">
-          {t('modals.newChannel.cancel')}
+          {t(`${localePath}cancel`)}
         </Button>
         <Button variant="primary" type="submit">
-          {t('modals.newChannel.submit')}
+          {t(`${localePath}submit`)}
         </Button>
       </div>
     </Form>

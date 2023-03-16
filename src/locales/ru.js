@@ -7,6 +7,8 @@ export default {
     errorMessages: {
       authentication: 'Неверные имя пользователя или пароль',
       network: 'Ошибка соединения',
+      required: 'Обязательное поле',
+      unique: 'Должно быть уникальным',
     },
     login: {
       enter: 'Войти',
