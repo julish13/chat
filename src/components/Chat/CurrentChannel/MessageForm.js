@@ -1,20 +1,27 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useContext, useRef, useState } from 'react';
+import React, { useContext, useRef, useState, useEffect } from 'react';
 import { InputGroup, Form, Overlay, Spinner } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
+import { useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import WebSocketContext from '@store/context/web-socket-context';
 import AuthContext from '@store/context/auth-context.js';
 import InputSvg from '@assets/img/chat-input.svg';
+import { chatSelector } from '@store/redux/selectors.js';
 
 const MessageForm = ({ channelId }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { t } = useTranslation();
   const webSocketContext = useContext(WebSocketContext);
   const authContext = useContext(AuthContext);
+  const { currentChannelId } = useSelector(chatSelector);
   const formRef = useRef();
   const inputRef = useRef();
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, [currentChannelId]);
 
   const submitHandler = ({ body }) => {
     webSocketContext.sendMessage(
@@ -75,6 +82,7 @@ const MessageForm = ({ channelId }) => {
             placeholder={t('chat.input.placeholder')}
             className="border-0 p-0 ps-2 form-control"
             id="body"
+            autoFocus
             {...formik.getFieldProps('body')}
           />
 
