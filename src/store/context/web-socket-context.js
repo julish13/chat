@@ -44,9 +44,8 @@ const WebSocketContextProvider = ({ children }) => {
   );
 
   const addChannel = useCallback(
-    (c) => {
-      socket.timeout(5000).emit('newChannel', c, (err) => {
-        console.log(c);
+    (channel) => {
+      socket.timeout(5000).emit('newChannel', channel, (err) => {
         if (err) {
           setHasError(true);
           console.error(err.message);
