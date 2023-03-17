@@ -18,7 +18,12 @@ const ChannelsListItem = ({ name, id, removable }) => {
   return (
     <Nav.Item as="li" className="w-100" key={id}>
       {removable ? (
-        <DropdownItem isActive={isActive} name={name} changeChannelHandler={changeChannelHandler} />
+        <DropdownItem
+          isActive={isActive}
+          name={name}
+          id={id}
+          changeChannelHandler={changeChannelHandler}
+        />
       ) : (
         <DefaultItem isActive={isActive} name={name} changeChannelHandler={changeChannelHandler} />
       )}

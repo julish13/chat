@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { useContext, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Dropdown, ButtonGroup } from 'react-bootstrap';
+import WebSocketContext from '@store/context/web-socket-context.js';
 import DefaultItem from './DefaultItem.js';
 
 const LOCALE_PATH = 'chat.channels.dropdown.';
 
-const DropdownItem = ({ isActive, name, changeChannelHandler }) => {
+const DropdownItem = ({ isActive, name, id, changeChannelHandler }) => {
   const { t } = useTranslation();
+  const webSocketContext = useContext(WebSocketContext);
 
-  const removeItem = () => {};
-  const renameItem = () => {};
+  const removeItem = useCallback(() => {
+    webSocketContext.removeChannel(id);
+  }, [id]);
+
+  const renameItem = useCallback(() => {}, []);
 
   const dropdownActions = {
     remove: removeItem,

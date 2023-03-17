@@ -46,6 +46,13 @@ const chatSlice = createSlice({
       state.channels.push(channel);
       state.currentChannelId = channel.id;
     },
+    removeChannel(state, action) {
+      const id = action.payload;
+      state.channels = state.channels.filter(({ id: channelId }) => channelId !== id);
+      if (state.currentChannelId === id) {
+        state.currentChannelId = state.channels[0].id;
+      }
+    },
   },
   extraReducers: (builder) => {
     builder
