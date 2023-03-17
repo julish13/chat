@@ -14,7 +14,7 @@ const ChannelsHeading = () => {
 
   return (
     <div className="d-flex justify-content-between mb-2 ps-4 pe-2">
-      <span>{t('chat.channels')}</span>
+      <span>{t('chat.channels.title')}</span>
       <button
         type="button"
         className="p-0 text-primary btn btn-group-vertical"

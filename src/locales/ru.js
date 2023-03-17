@@ -16,7 +16,16 @@ export default {
       password: 'Пароль',
     },
     chat: {
-      channels: 'Каналы',
+      channels: {
+        title: 'Каналы',
+        dropdown: {
+          title: 'Управление каналом',
+          actions: {
+            remove: 'Удалить',
+            rename: 'Переименовать',
+          },
+        },
+      },
       counter: {
         count_one: '{{count}} сообщение',
         count_few: '{{count}} сообщения',

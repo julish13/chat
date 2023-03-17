@@ -1,30 +1,16 @@
-import React, { useCallback } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Button, Nav } from 'react-bootstrap';
-import { chatActions } from '@store/redux/actions.js';
+import React from 'react';
+import { Nav } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 import { chatSelector } from '@store/redux/selectors.js';
+import ChannelsListItem from './ChannelsListItem.js';
 
 const ChannelsList = () => {
-  const { channels, currentChannelId } = useSelector(chatSelector);
-  const dispatch = useDispatch();
-  const changeChannelHandler = useCallback((id) => {
-    dispatch(chatActions.setCurrentChannel(id));
-  }, []);
+  const { channels } = useSelector(chatSelector);
 
   return (
-    <Nav as="ul" variant="pills" fill className="flex-column px-2">
-      {channels.map(({ id, name }) => (
-        <Nav.Item as="li" className="w-100" key={id}>
-          <Button
-            variant={id === currentChannelId ? 'secondary' : null}
-            className="w-100 rounded-0 text-start"
-            onClick={() => changeChannelHandler(id)}
-            type="button"
-          >
-            <span className="me-1">#</span>
-            {name}
-          </Button>
-        </Nav.Item>
+    <Nav as="ul" variant="pills" fill className="flex-column px-2 mb-3 overflow-auto h-100 d-block">
+      {channels.map(({ id, name, removable }) => (
+        <ChannelsListItem name={name} id={id} removable={removable} key={id} />
       ))}
     </Nav>
   );
