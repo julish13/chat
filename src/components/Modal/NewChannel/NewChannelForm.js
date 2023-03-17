@@ -9,7 +9,7 @@ import { modalActions } from '@store/redux/actions.js';
 import { chatSelector } from '@store/redux/selectors.js';
 import WebSocketContext from '@store/context/web-socket-context';
 
-const localePath = 'modals.newChannel.';
+const LOCALE_PATH = 'modals.newChannel.';
 
 const NewChannelForm = () => {
   const webSocketContext = useContext(WebSocketContext);
@@ -59,15 +59,15 @@ const NewChannelForm = () => {
         {...formik.getFieldProps('name')}
       />
       <Form.Label htmlFor="name" className="visually-hidden">
-        {t(`${localePath}label`)}
+        {t(`${LOCALE_PATH}label`)}
       </Form.Label>
       <Form.Control.Feedback type="invalid">{formik.errors.name}</Form.Control.Feedback>
       <div className="d-flex justify-content-end">
         <Button variant="secondary" onClick={onCancel} type="button" className="me-2">
-          {t(`${localePath}cancel`)}
+          {t(`${LOCALE_PATH}cancel`)}
         </Button>
         <Button variant="primary" type="submit">
-          {t(`${localePath}submit`)}
+          {t(`${LOCALE_PATH}submit`)}
         </Button>
       </div>
     </Form>
