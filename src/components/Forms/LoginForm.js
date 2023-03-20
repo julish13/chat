@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
@@ -9,13 +9,22 @@ import FormControl from './FormControl.js';
 
 const url = routes.loginPath();
 
+const STATE = {
+  INITIAL: 'initial',
+  PROCESSING: 'processing',
+  FAILED: 'failed',
+};
+
 const LoginForm = () => {
-  const [authenticationFailed, setAuthenticationFailed] = useState(false);
+  const [state, setState] = useState(STATE.INITIAL);
+  const [errorMessage, setErrorMessage] = useState(null);
   const { t } = useTranslation();
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
+  const usernameInputRef = useRef();
 
   const submitHandler = async (values) => {
+    setState(STATE.PROCESSING);
     fetch(url, {
       method: 'POST',
       body: JSON.stringify(values),
@@ -28,9 +37,10 @@ const LoginForm = () => {
           return res.json();
         }
         return res.json().then(() => {
-          setAuthenticationFailed(true);
-          const errorMessage = 'Authentication failed!';
-          throw new Error(errorMessage);
+          setState(STATE.FAILED);
+          const message = t('errorMessages.authentication');
+          setErrorMessage(message);
+          throw new Error(message);
         });
       })
       .then((data) => {
@@ -58,7 +68,10 @@ const LoginForm = () => {
         required
         formik={formik}
         autoComplete="username"
-        isInvalid={authenticationFailed}
+        isInvalid={state === STATE.FAILED}
+        showError={false}
+        autoFocus
+        ref={usernameInputRef}
       />
       <FormControl
         className="form-floating mb-4"
@@ -68,14 +81,15 @@ const LoginForm = () => {
         required
         formik={formik}
         autoComplete="current-password"
-        showError
-        isInvalid={authenticationFailed}
+        isInvalid={state === STATE.FAILED}
+        type="password"
+        errorMessage={errorMessage}
       />
       <Button
         type="submit"
         variant="outline-primary"
         className="w-100 mb-3"
-        onBlur={() => setAuthenticationFailed(false)}
+        disabled={state === STATE.PROCESSING}
       >
         {t('login.enter')}
       </Button>
