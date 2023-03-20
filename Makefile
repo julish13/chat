@@ -1,4 +1,5 @@
-install: npm ci
+install: 
+	npm ci
 
 start:
 	make start-backend & make start-frontend
