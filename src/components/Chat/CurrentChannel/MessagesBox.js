@@ -1,27 +1,30 @@
-/* eslint-disable react/jsx-props-no-spreading */
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useMemo, useState } from 'react';
 
 const MessagesBox = ({ messages }) => {
-  const messagesEndRef = useRef();
-
-  const scrollToBottom = (behavior = 'auto') => {
-    messagesEndRef.current?.scrollIntoView({ behavior });
-  };
+  const [hasToScroll, setHasToScroll] = useState(true);
+  const messagesBoxRef = useRef();
 
   useEffect(() => {
-    scrollToBottom();
-  }, []);
+    if (hasToScroll) {
+      messagesBoxRef.current.scrollTop = messagesBoxRef.current.scrollHeight;
+      setHasToScroll(false);
+    }
+  }, [hasToScroll]);
 
-  useEffect(() => {
-    scrollToBottom('smooth');
+  useMemo(() => {
+    if (messagesBoxRef.current) {
+      const { scrollTop, clientHeight, scrollHeight } = messagesBoxRef.current;
+      if (scrollTop + clientHeight === scrollHeight) {
+        setHasToScroll(true);
+      }
+    }
   }, [messages]);
 
   return (
-    <div className="chat-messages overflow-auto px-5" id="messages-box">
-      {messages.map(({ id, username, body }, index) => {
-        const props = index === messages.length - 1 ? { ref: messagesEndRef } : {};
+    <div className="chat-messages overflow-auto px-5" id="messages-box" ref={messagesBoxRef}>
+      {messages.map(({ id, username, body }) => {
         return (
-          <div className="text-break mb-2" key={id} {...props}>
+          <div className="text-break mb-2" key={id}>
             <b>{username}</b>: {body}
           </div>
         );
