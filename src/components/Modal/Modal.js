@@ -5,10 +5,12 @@ import { modalActions } from '@store/redux/actions.js';
 import { modalSelector } from '@store/redux/selectors.js';
 import NewChannelModal from './ChannelNamingModals/NewChannelModal.js';
 import RenameChannelModal from './ChannelNamingModals/RenameChannelModal.js';
+import RemoveChannelModal from './RemoveChannelModal.js';
 
 const modals = {
   newChannel: <NewChannelModal />,
   renameChannel: <RenameChannelModal />,
+  removeChannel: <RemoveChannelModal />,
 };
 
 const Modal = () => {

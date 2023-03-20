@@ -1,8 +1,7 @@
-import React, { useContext, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Button, Dropdown, ButtonGroup } from 'react-bootstrap';
-import WebSocketContext from '@store/context/web-socket-context.js';
 import { modalActions } from '@store/redux/actions.js';
 import DefaultItem from './DefaultItem.js';
 
@@ -11,11 +10,10 @@ const LOCALE_PATH = 'chat.channels.dropdown.';
 const DropdownItem = ({ isActive, name, id, changeChannelHandler }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const webSocketContext = useContext(WebSocketContext);
 
   const removeItem = useCallback(() => {
-    webSocketContext.removeChannel(id);
-  }, [id]);
+    dispatch(modalActions.showModal({ type: 'removeChannel', payload: { id } }));
+  }, []);
 
   const renameItem = useCallback(() => {
     dispatch(modalActions.showModal({ type: 'renameChannel', payload: { id } }));

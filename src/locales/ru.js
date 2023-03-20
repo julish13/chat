@@ -50,6 +50,12 @@ export default {
         cancel: 'Отменить',
         submit: 'Отправить',
       },
+      removeChannel: {
+        title: 'Удалить канал',
+        text: 'Уверены?',
+        cancel: 'Отменить',
+        submit: 'Удалить',
+      },
     },
   },
 };
