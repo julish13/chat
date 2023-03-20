@@ -1,19 +1,11 @@
-import React, { useContext } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import AuthContext from '@store/context/auth-context.js';
 import { LoginForm } from '@components';
 import loginImg from '@assets/img/login.jpeg';
 
 const Login = () => {
-  const context = useContext(AuthContext);
-  const { isAuthenticated } = context;
-
-  if (isAuthenticated) {
-    return <Navigate to="/" replace />;
-  }
-
   const { t } = useTranslation();
   return (
     <Container fluid className="h-100">
