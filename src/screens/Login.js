@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import AuthContext from '@store/context/auth-context.js';
@@ -26,7 +26,12 @@ const Login = () => {
               </Col>
               <LoginForm />
             </Card.Body>
-            <Card.Footer className="p-4" />
+            <Card.Footer className="p-4">
+              <div className="text-center">
+                <span className="me-1">{t('login.footer.text')}</span>
+                <Link to="/signup">{t('login.footer.signupLink')}</Link>
+              </div>
+            </Card.Footer>
           </Card>
         </Col>
       </Row>

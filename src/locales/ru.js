@@ -15,6 +15,10 @@ export default {
       enter: 'Войти',
       username: 'Ваш ник',
       password: 'Пароль',
+      footer: {
+        text: 'Нет аккаунта?',
+        signupLink: 'Регистрация',
+      },
     },
     chat: {
       channels: {
