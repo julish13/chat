@@ -9,6 +9,7 @@ export default {
       network: 'Ошибка соединения',
       required: 'Обязательное поле',
       unique: 'Должно быть уникальным',
+      channelNameLength: 'От 3 до 20 символов',
     },
     login: {
       enter: 'Войти',

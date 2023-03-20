@@ -38,7 +38,9 @@ const ChannelNamingForm = ({ onSubmit }) => {
     name: Yup.string()
       .trim()
       .required(t('errorMessages.required'))
-      .notOneOf(channelsNames, t('errorMessages.unique')),
+      .notOneOf(channelsNames, t('errorMessages.unique'))
+      .min(3, t('errorMessages.channelNameLength'))
+      .max(20, t('errorMessages.channelNameLength')),
   });
 
   const formik = useFormik({
