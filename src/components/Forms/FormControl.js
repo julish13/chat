@@ -1,22 +1,25 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+import React, { forwardRef } from 'react';
 import { Form } from 'react-bootstrap';
 
-const FormControl = ({
-  id,
-  placeholder,
-  label,
-  required = false,
-  formik,
-  className,
-  type,
-  autoComplete,
-  isInvalid,
-  showError,
-}) => {
-  const { t } = useTranslation();
-
+const FormControl = forwardRef(function FormControl(
+  {
+    id,
+    placeholder,
+    label,
+    required = false,
+    formik,
+    className,
+    type,
+    autoComplete,
+    isInvalid,
+    showError = true,
+    errorMessage,
+    feedbackPlacement,
+    autoFocus,
+  },
+  ref
+) {
   return (
     <Form.Group className={className} controlId={id}>
       <Form.Control
@@ -26,16 +29,18 @@ const FormControl = ({
         autoComplete={autoComplete}
         required={required}
         isInvalid={isInvalid}
+        autoFocus={autoFocus}
+        ref={ref}
         {...formik.getFieldProps(id)}
       />
       <Form.Label>{label}</Form.Label>
-      {showError && (
-        <Form.Control.Feedback type="invalid" tooltip>
-          {t('errorMessages.authentication')}
+      {showError && isInvalid && (
+        <Form.Control.Feedback type="invalid" tooltip placement={feedbackPlacement}>
+          {errorMessage}
         </Form.Control.Feedback>
       )}
     </Form.Group>
   );
-};
+});
 
 export default FormControl;

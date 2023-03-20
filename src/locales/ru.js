@@ -10,6 +10,10 @@ export default {
       required: 'Обязательное поле',
       unique: 'Должно быть уникальным',
       channelNameLength: 'От 3 до 20 символов',
+      usernameLength: 'От 3 до 20 символов',
+      passwordLength: 'Не менее 6 символов',
+      passwordConfirmation: 'Пароли должны совпадать',
+      signupUniqueness: 'Такой пользователь уже существует',
     },
     login: {
       enter: 'Войти',
@@ -19,6 +23,13 @@ export default {
         text: 'Нет аккаунта?',
         signupLink: 'Регистрация',
       },
+    },
+    signup: {
+      title: 'Регистрация',
+      username: 'Имя пользователя',
+      password: 'Пароль',
+      passwordConfirmation: 'Подтвердите пароль',
+      submit: 'Зарегистрироваться',
     },
     chat: {
       channels: {
