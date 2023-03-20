@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useContext, useMemo, useRef } from 'react';
+import React, { useMemo, useRef, useCallback, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
@@ -7,27 +7,32 @@ import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { modalActions } from '@store/redux/actions.js';
 import { chatSelector } from '@store/redux/selectors.js';
-import WebSocketContext from '@store/context/web-socket-context';
 
-const LOCALE_PATH = 'modals.newChannel.';
+const LOCALE_PATH = 'modals.channelNaming.';
 
-const NewChannelForm = () => {
-  const webSocketContext = useContext(WebSocketContext);
+const ChannelNamingForm = ({ onSubmit }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { channels } = useSelector(chatSelector);
   const inputRef = useRef();
 
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
+
   const channelsNames = useMemo(() => channels.map(({ name }) => name), [channels]);
 
-  const onCancel = () => {
+  const onCancel = useCallback(() => {
     dispatch(modalActions.hideModal());
-  };
+  }, []);
 
-  const submitHandler = (values) => {
-    webSocketContext.addChannel(values);
-    onCancel();
-  };
+  const submitHandler = useCallback(
+    (values) => {
+      onSubmit(values);
+      onCancel();
+    },
+    [onSubmit]
+  );
 
   const schema = Yup.object({
     name: Yup.string()
@@ -40,7 +45,6 @@ const NewChannelForm = () => {
     initialValues: { name: '' },
     validationSchema: schema,
     validateOnChange: false,
-    validateOnBlur: true,
     onSubmit: submitHandler,
     validate: () => {
       inputRef.current.focus();
@@ -55,7 +59,6 @@ const NewChannelForm = () => {
         type="name"
         name="name"
         isInvalid={formik.errors.name}
-        autoFocus
         {...formik.getFieldProps('name')}
       />
       <Form.Label htmlFor="name" className="visually-hidden">
@@ -74,4 +77,4 @@ const NewChannelForm = () => {
   );
 };
 
-export default NewChannelForm;
+export default ChannelNamingForm;

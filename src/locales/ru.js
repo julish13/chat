@@ -42,8 +42,9 @@ export default {
       text: 'Но вы можете перейти <1>на главную страницу</1>',
     },
     modals: {
-      newChannel: {
-        title: 'Добавить канал',
+      channelNaming: {
+        newChannelTitle: 'Добавить канал',
+        renameChannelTitle: 'Переименовать канал',
         label: 'Имя канала',
         cancel: 'Отменить',
         submit: 'Отправить',

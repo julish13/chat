@@ -53,6 +53,11 @@ const chatSlice = createSlice({
         state.currentChannelId = state.channels[0].id;
       }
     },
+    renameChannel(state, action) {
+      const { id, name } = action.payload;
+      const index = state.channels.findIndex(({ id: channelId }) => id === channelId);
+      state.channels[index].name = name;
+    },
   },
   extraReducers: (builder) => {
     builder

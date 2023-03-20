@@ -3,10 +3,12 @@ import { Modal as BootstrapModal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { modalActions } from '@store/redux/actions.js';
 import { modalSelector } from '@store/redux/selectors.js';
-import NewChannelModal from './NewChannel/NewChannelModal.js';
+import NewChannelModal from './ChannelNamingModals/NewChannelModal.js';
+import RenameChannelModal from './ChannelNamingModals/RenameChannelModal.js';
 
 const modals = {
   newChannel: <NewChannelModal />,
+  renameChannel: <RenameChannelModal />,
 };
 
 const Modal = () => {

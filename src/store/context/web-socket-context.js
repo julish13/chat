@@ -28,6 +28,10 @@ const WebSocketContextProvider = ({ children }) => {
       dispatch(chatActions.removeChannel(id));
     });
 
+    socket.on('renameChannel', (channel) => {
+      dispatch(chatActions.renameChannel(channel));
+    });
+
     return () => {
       socket.disconnect();
     };
@@ -71,6 +75,18 @@ const WebSocketContextProvider = ({ children }) => {
     [socket]
   );
 
+  const renameChannel = useCallback(
+    (channel) => {
+      socket.timeout(5000).emit('renameChannel', channel, (err) => {
+        if (err) {
+          setHasError(true);
+          console.error(err.message);
+        }
+      });
+    },
+    [socket]
+  );
+
   const contextValue = useMemo(
     () => ({
       socket,
@@ -78,6 +94,7 @@ const WebSocketContextProvider = ({ children }) => {
       hasError,
       addChannel,
       removeChannel,
+      renameChannel,
     }),
     [socket, sendMessage, hasError, addChannel]
   );
